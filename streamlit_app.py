@@ -58,6 +58,11 @@ if st.sidebar.button('Predict Survival'):
         'Embarked': [embarked]
     })
 
+    
+    # Apply SAME preprocessing as training
+    input_data["Sex"] = input_data["Sex"].map({"male": 0, "female": 1})
+    input_data["Embarked"] = input_data["Embarked"].map({"C": 0, "Q": 1, "S": 2})
+    
     # Use the loaded pipeline to make a prediction
     prediction = pipeline.predict(input_data)[0]
     prediction_proba = pipeline.predict_proba(input_data)[0]
